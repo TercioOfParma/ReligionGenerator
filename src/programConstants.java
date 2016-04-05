@@ -13,14 +13,12 @@
  */
 public enum programConstants
 {
-	MAX_GODS(4), MONOTHEISM(0),
-	FIRE(1), WATER(2),
-	EARTH(3), NO_GOD_TYPES(3),
+	MAX_GODS(20),
     MAXIMUM_NAME_SIZE(15), LATIN(0),
     ARAMAIC(1), LATIN_MINIMUM_CHAR('a'),
     LATIN_MAXIMUM_CHAR('z'), LATIN_ALPHABET_SIZE(26),
     ARAMAIC_MINIMUM_CHAR('ܐ'), ARAMAIC_MAXIMUM_CHAR('ܬ'),
-    ARAMAIC_ALPHABET_SIZE(27);
+    ARAMAIC_ALPHABET_SIZE(28);
  
     private int constantValue;
      // ===== Basic Functionality ======

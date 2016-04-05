@@ -15,6 +15,7 @@ public class God
 {
     //==== Class Variables ====
     private String godName, godDescription;
+    private String godTemperament;
      //==== Class Initialization ====
     public God()
     {
@@ -33,7 +34,8 @@ public class God
         String temporaryCombination;
         
         temporaryCombination = new String();
-        nameSize = nameGen.nextInt(programConstants.MAXIMUM_NAME_SIZE.getConstant()) + 2;
+        //The below is so there are an even number of characters
+        nameSize = ((nameGen.nextInt(programConstants.MAXIMUM_NAME_SIZE.getConstant()) /2) *2) + 2;
         temporaryName = new char[nameSize];
         nameCharDecider.generateAlphabetFrequencies();
         nameCharDecider.generateCombinations();
@@ -41,16 +43,16 @@ public class God
         {
             frequencyCompare = nameGen.nextFloat() * nameGen.nextInt(programConstants.LATIN_ALPHABET_SIZE.getConstant());
             temporaryCombination = nameCharDecider.returnCombination(nameCharDecider.findIndexClosest(frequencyCompare));
-            
             temporaryName[2*i] = temporaryCombination.charAt(0);
             temporaryName[2*i + 1] = temporaryCombination.charAt(1);
             nameGen.setSeed(nameGen.nextInt());
         }
        godName = new String(temporaryName);
     }
-    public void generateGodDescription(int godType)
+    public void generateGodDescription(int godType, godTypes godDescriptor)
     {
     	String temp;
+    	int i;
     	Random genderDecide = new Random();
     	int gender = genderDecide.nextInt(3);
     	switch(gender)
@@ -65,23 +67,8 @@ public class God
     			temp = String.format("God of ");
     			break;
     	}
-    	
-        if(godType == programConstants.MONOTHEISM.getConstant())
-        {
-            temp = String.format("%s%s", temp, "All!");
-        }
-        else if(godType == programConstants.FIRE.getConstant())
-        {
-        	 temp = String.format("%s%s", temp, "Fire and Burning");
-        }
-        else if(godType == programConstants.WATER.getConstant())
-        {
-        	 temp = String.format("%s%s", temp, "The Sea and Water");
-        }
-        else if (godType == programConstants.EARTH.getConstant())
-        {
-        	 temp = String.format("%s%s", temp, "The Soil and of the Earth");
-        }
+    	temp = String.format("%s%s", temp, godDescriptor.getDescription(godType));
+    	godTemperament = godDescriptor.getTemperament(godType);
         this.godDescription = temp;
     }
     public String getGodName()

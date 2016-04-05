@@ -22,15 +22,15 @@ public class characterFrequencyGenerator
     public characterFrequencyGenerator(int scriptNo)
     {
     	this.scriptNo = scriptNo;
-    	if(scriptNo == programConstants.ARAMAIC.getConstant())//This allows for mulitple script god names
+    	if(scriptNo == programConstants.ARAMAIC.getConstant())//This allows for multiple script god names
     	{
     		alphabetFrequencies = new float[programConstants.ARAMAIC_ALPHABET_SIZE.getConstant()];
-    		charCombinations = new String[programConstants.ARAMAIC_ALPHABET_SIZE.getConstant() * 2];
+    		charCombinations = new String[programConstants.ARAMAIC_ALPHABET_SIZE.getConstant()];
     	}
     	else
     	{
     		alphabetFrequencies = new float[programConstants.LATIN_ALPHABET_SIZE.getConstant()];
-    		charCombinations = new String[programConstants.LATIN_ALPHABET_SIZE.getConstant() * 2];
+    		charCombinations = new String[programConstants.LATIN_ALPHABET_SIZE.getConstant()];
     	}
     }
      // ===== Basic Functionality ======

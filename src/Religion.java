@@ -18,7 +18,7 @@ public class Religion
     private boolean isMonotheistic;
     public  God [] godContainer; 
     private int noGods;
-   
+    private godTypes godDescriptor;
      //==== Class Initialization ====
     public Religion(boolean monotheism, int scriptNo)
     {
@@ -26,13 +26,14 @@ public class Religion
     	Random godDecider;
     	
         setMonotheism(monotheism);
+        godDescriptor = new godTypes("godNames.txt");
         godDecider = new Random();
         if(isMonotheistic == true)
         {
             this.godContainer = new God[1];
             this.godContainer[0] = new God();
             this.godContainer[0].generateGodName(scriptNo);
-            this.godContainer[0].generateGodDescription(programConstants.MONOTHEISM.getConstant());
+            this.godContainer[0].generateGodDescription(0, godDescriptor);
         }
         else
         {
@@ -42,7 +43,7 @@ public class Religion
         	{
         		this.godContainer[i] = new God();
         		this.godContainer[i].generateGodName(scriptNo);
-        		this.godContainer[i].generateGodDescription(godDecider.nextInt(programConstants.NO_GOD_TYPES.getConstant()) + 1);
+        		this.godContainer[i].generateGodDescription(godDecider.nextInt(godDescriptor.getGodTypes()), godDescriptor);
         	}
         }
     }
