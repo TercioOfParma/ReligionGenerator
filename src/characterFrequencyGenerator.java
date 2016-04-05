@@ -3,36 +3,59 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package religiongenerator;
 import java.util.Random;
 /**
  *
  * @author Elliot Lake
  * @Brief Handles judging frequency of combination occurrence and the making these
  * combinations
+ * @Todo Change the branching if statements to allow for more scripts in a versatile
+ * way without modifiying the code
  */
 public class characterFrequencyGenerator 
 {
     //==== Class Variables ====
     private float [] alphabetFrequencies;
     private String [] charCombinations;
-     //==== Class Initialization ====
-    public characterFrequencyGenerator()
+    int scriptNo;
+     //==== Class Initialization ===
+    public characterFrequencyGenerator(int scriptNo)
     {
-        alphabetFrequencies = new float[programConstants.ALPHABET_SIZE.getConstant()];
-        charCombinations = new String[programConstants.ALPHABET_SIZE.getConstant() * 2];
+    	this.scriptNo = scriptNo;
+    	if(scriptNo == programConstants.ARAMAIC.getConstant())//This allows for mulitple script god names
+    	{
+    		alphabetFrequencies = new float[programConstants.ARAMAIC_ALPHABET_SIZE.getConstant()];
+    		charCombinations = new String[programConstants.ARAMAIC_ALPHABET_SIZE.getConstant() * 2];
+    	}
+    	else
+    	{
+    		alphabetFrequencies = new float[programConstants.LATIN_ALPHABET_SIZE.getConstant()];
+    		charCombinations = new String[programConstants.LATIN_ALPHABET_SIZE.getConstant() * 2];
+    	}
     }
      // ===== Basic Functionality ======
     public void generateAlphabetFrequencies()
     {
         int i;
         Random frequencyGenerator = new Random();
-        
-        for(i = 0; i < programConstants.ALPHABET_SIZE.getConstant(); i++)
+        if(this.scriptNo == programConstants.ARAMAIC.getConstant())
         {
-            alphabetFrequencies[i] = frequencyGenerator.nextFloat() * i;
-            frequencyGenerator.setSeed(frequencyGenerator.nextInt());
-            
+        	for(i = 0; i < programConstants.ARAMAIC_ALPHABET_SIZE.getConstant(); i++)
+        	{
+        		alphabetFrequencies[i] = frequencyGenerator.nextFloat() * i;
+        		frequencyGenerator.setSeed(frequencyGenerator.nextInt());
+		
+        	}
+	    
+        }
+        else
+        {
+        	for(i = 0; i < programConstants.LATIN_ALPHABET_SIZE.getConstant(); i++)
+        	{
+        		alphabetFrequencies[i] = frequencyGenerator.nextFloat() * i;
+        		frequencyGenerator.setSeed(frequencyGenerator.nextInt());
+		
+        	}
         }
     }
     public void generateCombinations()
@@ -40,13 +63,29 @@ public class characterFrequencyGenerator
         int i;
         Random charGenerator = new Random();
         char [] tempCombination = new char[2];
-        
-        for(i = 0; i < programConstants.ALPHABET_SIZE.getConstant(); i++)
+        if(this.scriptNo == programConstants.ARAMAIC.getConstant())
         {
-            tempCombination[0] = (char)(charGenerator.nextInt(programConstants.ALPHABET_SIZE.getConstant()) + programConstants.MINIMUM_CHAR.getConstant());
-            tempCombination[1] = (char)(charGenerator.nextInt(programConstants.ALPHABET_SIZE.getConstant()) + programConstants.MINIMUM_CHAR.getConstant());
-            charCombinations[i] = new String(tempCombination);
+        	for(i = 0; i < programConstants.ARAMAIC_ALPHABET_SIZE.getConstant(); i++)
+        	{
+        		tempCombination[0] = (char)(charGenerator.nextInt(programConstants.ARAMAIC_ALPHABET_SIZE.getConstant()) 
+        				+ programConstants.ARAMAIC_MINIMUM_CHAR.getConstant());
+        		tempCombination[1] = (char)(charGenerator.nextInt(programConstants.ARAMAIC_ALPHABET_SIZE.getConstant()) + 
+        				programConstants.ARAMAIC_MINIMUM_CHAR.getConstant());
+        		charCombinations[i] = new String(tempCombination);
             
+        	} 
+        }
+        else
+        {
+        	for(i = 0; i < programConstants.LATIN_ALPHABET_SIZE.getConstant(); i++)
+        	{
+        		tempCombination[0] = (char)(charGenerator.nextInt(programConstants.LATIN_ALPHABET_SIZE.getConstant()) 
+        				+ programConstants.LATIN_MINIMUM_CHAR.getConstant());
+        		tempCombination[1] = (char)(charGenerator.nextInt(programConstants.LATIN_ALPHABET_SIZE.getConstant()) + 
+        				programConstants.LATIN_MINIMUM_CHAR.getConstant());
+        		charCombinations[i] = new String(tempCombination);
+            
+        	}
         }
     }
     public int findIndexClosest(float generatedValue)
@@ -54,16 +93,30 @@ public class characterFrequencyGenerator
          int i;
          int preferredIndex = 0;
          float preferredIndexValue = 1000.0f;
-         for(i = 0; i < programConstants.ALPHABET_SIZE.getConstant(); i++)
+         if(this.scriptNo == programConstants.ARAMAIC.getConstant())
          {
-             if(Math.abs(generatedValue - preferredIndexValue) > Math.abs(generatedValue - alphabetFrequencies[i]))
-             {
-                 preferredIndex = i;
-                 preferredIndexValue = alphabetFrequencies[i];
-             }
+        	 for(i = 0; i < programConstants.ARAMAIC_ALPHABET_SIZE.getConstant(); i++)
+        	 {
+        		 if(Math.abs(generatedValue - preferredIndexValue) > Math.abs(generatedValue - alphabetFrequencies[i]))
+        		 {
+        			 preferredIndex = i;
+        			 preferredIndexValue = alphabetFrequencies[i];
+        		 }
                      
+        	 }
          }
-         
+         else
+         {
+        	 for(i = 0; i < programConstants.LATIN_ALPHABET_SIZE.getConstant(); i++)
+        	 {
+        		 if(Math.abs(generatedValue - preferredIndexValue) > Math.abs(generatedValue - alphabetFrequencies[i]))
+        		 {
+        			 preferredIndex = i;
+        			 preferredIndexValue = alphabetFrequencies[i];
+        		 }
+                     
+        	 }
+         }
          return preferredIndex;
     }
     public String returnCombination(int index)

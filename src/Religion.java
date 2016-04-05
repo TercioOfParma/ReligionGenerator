@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package religiongenerator;
+
 
 /**
  *
@@ -20,14 +20,14 @@ public class Religion
     
    
      //==== Class Initialization ====
-    public Religion(boolean monotheism)
+    public Religion(boolean monotheism, int scriptNo)
     {
         setMonotheism(monotheism);
         if(isMonotheistic == true)
         {
             this.godContainer = new God[1];
             this.godContainer[0] = new God();
-            this.godContainer[0].generateGodName();
+            this.godContainer[0].generateGodName(scriptNo);
             this.godContainer[0].generateGodDescription(this.isMonotheistic);
         }
     }

@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package religiongenerator;
+
 
 /**
  *
  * @author Elliot Lake
- * @brief This governs all of the program constants that I will utilize in the
+ * @brief This governs all of the program constants that I will utilise in the
  * project
  */
 public enum programConstants
 {
-    MAXIMUM_NAME_SIZE(15), MINIMUM_CHAR('a'),
-    MAXIMUM_CHAR('z'), ALPHABET_SIZE(26);
-  
+    MAXIMUM_NAME_SIZE(15), LATIN(0),
+    ARAMAIC(1), LATIN_MINIMUM_CHAR('a'),
+    LATIN_MAXIMUM_CHAR('z'), LATIN_ALPHABET_SIZE(26),
+    ARAMAIC_MINIMUM_CHAR('ܐ'), ARAMAIC_MAXIMUM_CHAR('ܬ'),
+    ARAMAIC_ALPHABET_SIZE(27);
+ 
     private int constantValue;
      // ===== Basic Functionality ======
     private programConstants(int toAssign)

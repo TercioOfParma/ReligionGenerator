@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package religiongenerator;
+
 
 /**
  *
@@ -15,7 +15,7 @@ public class ReligionGenerator
 {
     public static void main(String[] args)
     {
-       Religion toGenerate = new Religion(true);
+       Religion toGenerate = new Religion(true, programConstants.ARAMAIC.getConstant());
        
        System.out.println("Monotheistic Religion? " + toGenerate.getMonotheism());
        System.out.println("God Name? " + toGenerate.godContainer[0].getGodName() 

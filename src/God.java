@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package religiongenerator;
+
 import java.util.Random;
 /**
  *
@@ -15,7 +15,6 @@ public class God
 {
     //==== Class Variables ====
     private String godName, godDescription;
-    public int value;
      //==== Class Initialization ====
     public God()
     {
@@ -24,21 +23,23 @@ public class God
     }
     // ===== GETTERS AND SETTERS ======
     // ===== Basic Functionality ======
-    public void generateGodName()
+    public void generateGodName(int scriptNo)
     {
         char [] temporaryName;
         Random nameGen = new Random();
-        characterFrequencyGenerator nameCharDecider = new characterFrequencyGenerator();
+        characterFrequencyGenerator nameCharDecider = new characterFrequencyGenerator(scriptNo);
         int nameSize, i;
         float frequencyCompare;
-        String temporaryCombination = new String();
+        String temporaryCombination;
+        
+        temporaryCombination = new String();
         nameSize = nameGen.nextInt(programConstants.MAXIMUM_NAME_SIZE.getConstant()) + 2;
         temporaryName = new char[nameSize];
         nameCharDecider.generateAlphabetFrequencies();
         nameCharDecider.generateCombinations();
         for(i = 0; i < nameSize / 2; i++)
         {
-            frequencyCompare = nameGen.nextFloat() * nameGen.nextInt(programConstants.ALPHABET_SIZE.getConstant());
+            frequencyCompare = nameGen.nextFloat() * nameGen.nextInt(programConstants.LATIN_ALPHABET_SIZE.getConstant());
             temporaryCombination = nameCharDecider.returnCombination(nameCharDecider.findIndexClosest(frequencyCompare));
             
             temporaryName[2*i] = temporaryCombination.charAt(0);
