@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.util.Random;
 
 /**
  *
@@ -17,18 +17,33 @@ public class Religion
     //=== Class Variables =====
     private boolean isMonotheistic;
     public  God [] godContainer; 
-    
+    private int noGods;
    
      //==== Class Initialization ====
     public Religion(boolean monotheism, int scriptNo)
     {
+    	int i;
+    	Random godDecider;
+    	
         setMonotheism(monotheism);
+        godDecider = new Random();
         if(isMonotheistic == true)
         {
             this.godContainer = new God[1];
             this.godContainer[0] = new God();
             this.godContainer[0].generateGodName(scriptNo);
-            this.godContainer[0].generateGodDescription(this.isMonotheistic);
+            this.godContainer[0].generateGodDescription(programConstants.MONOTHEISM.getConstant());
+        }
+        else
+        {
+        	noGods = godDecider.nextInt(programConstants.MAX_GODS.getConstant()) + 1;
+        	this.godContainer = new God[noGods];
+        	for(i = 0; i < noGods; i++)
+        	{
+        		this.godContainer[i] = new God();
+        		this.godContainer[i].generateGodName(scriptNo);
+        		this.godContainer[i].generateGodDescription(godDecider.nextInt(programConstants.NO_GOD_TYPES.getConstant()) + 1);
+        	}
         }
     }
     //===== GETTERS AND SETTERS =====
@@ -41,5 +56,25 @@ public class Religion
     {
         this.isMonotheistic = monotheism; 
         
+    }
+    public void displayGods()
+    {
+    	int i;
+    	System.out.println("Monotheistic Religion? " + getMonotheism());
+    	if(getMonotheism() == true)
+    	{
+    		
+    	       System.out.println("God Name? " + godContainer[0].getGodName() + ", " + godContainer[0].getGodDescription());
+    	}
+    	else
+    	{
+    		for(i = 0;i < this.noGods;i++)
+    		{
+    			 System.out.println("God Name? " + godContainer[i].getGodName() + ", " + godContainer[i].getGodDescription());	
+    			
+    		}
+    		
+    	}
+    	
     }
 }

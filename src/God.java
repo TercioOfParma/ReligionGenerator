@@ -48,12 +48,41 @@ public class God
         }
        godName = new String(temporaryName);
     }
-    public void generateGodDescription(boolean monotheist)
+    public void generateGodDescription(int godType)
     {
-        if(monotheist == true)
+    	String temp;
+    	Random genderDecide = new Random();
+    	int gender = genderDecide.nextInt(3);
+    	switch(gender)
+    	{
+    		case 1:
+    			temp = String.format("God of ");
+    			break;
+    		case 2:
+    			temp = String.format("Goddess of ");
+    			break;
+    		default:
+    			temp = String.format("God of ");
+    			break;
+    	}
+    	
+        if(godType == programConstants.MONOTHEISM.getConstant())
         {
-            this.godDescription = ", God of All!Bow Before his splendor!";
+            temp = String.format("%s%s", temp, "All!");
         }
+        else if(godType == programConstants.FIRE.getConstant())
+        {
+        	 temp = String.format("%s%s", temp, "Fire and Burning");
+        }
+        else if(godType == programConstants.WATER.getConstant())
+        {
+        	 temp = String.format("%s%s", temp, "The Sea and Water");
+        }
+        else if (godType == programConstants.EARTH.getConstant())
+        {
+        	 temp = String.format("%s%s", temp, "The Soil and of the Earth");
+        }
+        this.godDescription = temp;
     }
     public String getGodName()
     {

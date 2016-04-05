@@ -15,11 +15,9 @@ public class ReligionGenerator
 {
     public static void main(String[] args)
     {
-       Religion toGenerate = new Religion(true, programConstants.ARAMAIC.getConstant());
+       Religion toGenerate = new Religion(false, programConstants.ARAMAIC.getConstant());
        
-       System.out.println("Monotheistic Religion? " + toGenerate.getMonotheism());
-       System.out.println("God Name? " + toGenerate.godContainer[0].getGodName() 
-               + toGenerate.godContainer[0].getGodDescription());
+       toGenerate.displayGods();
        
     }
     
