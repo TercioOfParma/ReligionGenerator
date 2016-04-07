@@ -33,7 +33,7 @@ public class Religion
             this.godContainer = new God[1];
             this.godContainer[0] = new God();
             this.godContainer[0].generateGodName(scriptNo);
-            this.godContainer[0].generateGodDescription(0, godDescriptor);
+            this.godContainer[0].generateGodDescription(0, godDescriptor, isMonotheistic);
         }
         else
         {
@@ -43,7 +43,7 @@ public class Religion
         	{
         		this.godContainer[i] = new God();
         		this.godContainer[i].generateGodName(scriptNo);
-        		this.godContainer[i].generateGodDescription(godDecider.nextInt(godDescriptor.getGodTypes()), godDescriptor);
+        		this.godContainer[i].generateGodDescription(godDecider.nextInt(godDescriptor.getGodTypes()), godDescriptor, isMonotheistic);
         	}
         }
     }

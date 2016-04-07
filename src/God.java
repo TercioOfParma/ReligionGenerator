@@ -49,7 +49,7 @@ public class God
         }
        godName = new String(temporaryName);
     }
-    public void generateGodDescription(int godType, godTypes godDescriptor)
+    public void generateGodDescription(int godType, godTypes godDescriptor, boolean monotheism)
     {
     	String temp;
     	int i;
@@ -67,7 +67,15 @@ public class God
     			temp = String.format("God of ");
     			break;
     	}
-    	temp = String.format("%s%s", temp, godDescriptor.getDescription(godType));
+    	if(monotheism == true)
+    	{
+    		temp = String.format("%s%s", temp, "God of All");
+    		
+    	}
+    	else
+    	{
+    		temp = String.format("%s%s", temp, godDescriptor.getDescription(godType));
+    	}
     	godTemperament = godDescriptor.getTemperament(godType);
         this.godDescription = temp;
     }
