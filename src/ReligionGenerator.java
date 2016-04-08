@@ -13,9 +13,11 @@
  */
 public class ReligionGenerator
 {
+	//Just dummy main, a vehicle to test religions with no use of command line arguments
+	//and no returned values
     public static void main(String[] args)
     {
-       Religion toGenerate = new Religion(false, programConstants.ARAMAIC.getConstant());
+       Religion toGenerate = new Religion(false, programConstants.LATIN.getConstant());
        
        toGenerate.displayGods();
        

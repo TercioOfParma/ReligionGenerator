@@ -15,6 +15,13 @@ public class godTypes
 	private String [] typeDescription;
 	private String [] typeTemperament;
 	private int noGodTypes;
+	
+	//============ Initialisation ===============
+	/*
+	 * 
+	 * Generates descriptions and temperament of the various god types
+	 * Allows there to be variable god kinds from a file
+	 */
 	public godTypes(String filename)
 	{
 		try
@@ -36,13 +43,14 @@ public class godTypes
 		String [] splitString;
 		BufferedReader typeReader = new BufferedReader( new InputStreamReader(new FileInputStream(descriptorFile), "UTF8"));
 		
+		//Makes the descriptions etc. the right size, and gets the amount of god types
 		rawString = typeReader.readLine();
 		noLines = Integer.parseInt(rawString);
 		this.noGodTypes = noLines;
 		this.typeDescription = new String[noLines];
 		this.typeTemperament = new String[noLines];
 		
-		for(i = 0; i < noLines; i++)
+		for(i = 0; i < noLines; i++)//Loads the descriptions and temperament
 		{
 			rawString = typeReader.readLine();
 			splitString = rawString.split(",");
@@ -52,15 +60,18 @@ public class godTypes
 		typeReader.close();
 		
 	}
+	//Gets the number of god types
 	public int getGodTypes()
 	{
 		return noGodTypes;
 		
 	}
+	//Gets the description of the god type
 	public String getDescription(int index)
 	{
 		return typeDescription[index];
 	}
+	//Gets the temperament of the god type
 	public String getTemperament(int index)
 	{
 		return typeTemperament[index];
